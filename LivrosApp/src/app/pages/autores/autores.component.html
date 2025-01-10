@@ -1,0 +1,42 @@
+<h1>Autores</h1>
+
+<!-- Filter Input -->
+<div>
+    <mat-form-field style="width: 85%;">
+        <mat-label>Filtrar</mat-label>
+        <input matInput (keyup)="applyFilter($event.target)" placeholder="Filtrar Autores">
+        <button title="Adicionar autor" mat-stroked-button matSuffix (click)="IrParaAdicionarEditarAutor()">
+          <mat-icon>add</mat-icon>
+        </button>      
+    </mat-form-field>
+</div>
+<div class="mat-elevation-z8">
+    <table mat-table [dataSource]="dataSource" matSort>
+        <!-- ID Column -->
+        <ng-container matColumnDef="id">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>ID</th>
+            <td mat-cell *matCellDef="let element">{{ element.id }}</td>
+        </ng-container>
+
+        <!-- Título Column -->
+        <ng-container matColumnDef="nome">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Nome</th>
+            <td mat-cell *matCellDef="let element">{{ element.nome }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="acoes">
+            <th mat-header-cell *matHeaderCellDef>Ações</th>
+            <td mat-cell *matCellDef="let element">
+              <button title="Editar autor" mat-stroked-button (click)="IrParaAdicionarEditarAutor(element.id)">
+                <mat-icon>edit_note</mat-icon>
+              </button>
+              <button title="Apagar autor" mat-stroked-button (click)="ApagarAutor(element.id)">
+                <mat-icon>delete_outline</mat-icon>
+              </button>
+            </td>
+          </ng-container>
+        <!-- Header and Row Definitions -->
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+</div>

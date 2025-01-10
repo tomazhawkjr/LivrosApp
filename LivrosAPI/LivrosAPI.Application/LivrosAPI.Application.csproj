@@ -1,0 +1,27 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+	
+  <ItemGroup>
+	<PackageReference Include="CoreZipCode" Version="2.0.7" />
+	<PackageReference Include="FluentValidation" Version="11.9.2" />
+	<PackageReference Include="FluentValidation.DependencyInjectionExtensions" Version="11.9.2" />
+	<PackageReference Include="MediatR" Version="12.3.0" />
+	<PackageReference Include="Microsoft.Extensions.Configuration.Abstractions" Version="8.0.0" />
+	<PackageReference Include="Microsoft.Extensions.Identity.Stores" Version="8.0.6" />
+	<PackageReference Include="Microsoft.IdentityModel.Tokens" Version="7.6.0" />
+	<PackageReference Include="System.Reactive" Version="6.0.1" />
+	<PackageReference Include="Flunt" Version="2.0.5" />
+  </ItemGroup>
+	
+	
+  <ItemGroup>
+    <ProjectReference Include="..\LivrosAPI.Domain\LivrosAPI.Domain.csproj" />
+  </ItemGroup>
+
+</Project>

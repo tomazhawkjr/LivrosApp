@@ -1,0 +1,46 @@
+@use '../../../variables';
+
+body {
+    height: 100%;
+    display: flex !important;
+}
+
+app-root {
+    height: 100%;
+}
+
+.menu-icon{
+    color:variables.$primary-color;
+
+    &:hover{
+        opacity: 50%;
+    }
+}
+
+.sidenav {
+    height: 100%;
+    width: 100%;
+
+    align-items: center;
+    justify-content: center;
+    padding-bottom: 50px;
+
+    mat-drawer {
+        background-color: variables.$primary-color;
+        width: 200px;
+        padding: 10px;
+        padding-top: 20px;
+        border-right: 0px;
+    }
+
+    mat-drawer-content {
+        background-color: white;
+        color: black;
+        padding: 20px
+    }
+
+    .botao-menu {
+        height: 40px !important;
+    }
+
+}

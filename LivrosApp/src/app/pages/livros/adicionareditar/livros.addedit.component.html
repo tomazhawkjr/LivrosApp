@@ -1,0 +1,84 @@
+<h1>{{livro?.id ? 'Editar' : 'Novo'}} Livro</h1>
+
+<div class="container">
+  <mat-card>
+    <mat-card-content>
+      <form [formGroup]="livroForm" (ngSubmit)="onSubmit()">
+      
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Título</mat-label>
+          <input matInput formControlName="titulo" placeholder="Digite o título do livro" />
+        </mat-form-field>
+      
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Editora</mat-label>
+          <input matInput formControlName="editora" placeholder="Digite a editora" />
+        </mat-form-field>
+      
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Edição</mat-label>
+          <input matInput type="number" formControlName="edicao" placeholder="Digite a edição" />
+        </mat-form-field>
+      
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Ano de Publicação</mat-label>
+          <input matInput formControlName="anoPublicacao" placeholder="Digite o ano de publicação" />
+        </mat-form-field>
+      
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Assuntos</mat-label>
+          <mat-select formControlName="assuntos" multiple>
+            <mat-option *ngFor="let assunto of listaAssuntos" [value]="assunto.id">
+              {{ assunto.descricao }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Autores</mat-label>
+          <mat-select formControlName="autores" multiple>
+            <mat-option *ngFor="let autor of listaAutores" [value]="autor.id">
+              {{ autor.nome }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Formas Compra</mat-label>
+          <mat-select (selectionChange)="onSelectionFormaCompraChange($event)" formControlName="formasCompra" multiple>
+            <mat-option *ngFor="let valor of listaValores" [value]="valor.id">
+              {{ valor.denominacao }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <h2 *ngIf="listaValoresSelecionados.length">Valores das formas compra</h2>
+
+        <div formGroupName="valores">
+          <div *ngFor="let formaCompraId of listaValoresSelecionados">
+            <mat-form-field class="full-width" appearance="outline">
+              <mat-label>Valor para venda no(a) {{ getFormaCompraName(formaCompraId) }}</mat-label>
+              <input
+                matInput 
+                [formControlName]="getFormaCompraName(formaCompraId)"
+                currencyMask [options]="{ prefix: 'R$ ', thousands: '.', decimal: ',', align: 'left' }"
+              />
+            </mat-form-field>
+          </div>
+        </div>
+      
+        <div class="button-group">
+          <button mat-raised-button color="primary" type="submit" [disabled]="livroForm.invalid">
+            Salvar
+          </button>
+          <button mat-stroked-button color="warn" type="button" (click)="onReset()">
+            Limpar
+          </button>
+        </div>
+      </form>
+      
+    </mat-card-content>
+  </mat-card>
+</div>
+
+

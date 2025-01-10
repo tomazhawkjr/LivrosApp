@@ -1,0 +1,19 @@
+<div class="login-container">
+    <mat-card class="login-card">
+      <h1 style="font-weight:bold; text-align: center;">LivrosApp</h1>
+      <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+        <mat-form-field appearance="fill" class="form-field">
+          <mat-label>Usuário</mat-label>
+          <input matInput formControlName="username" placeholder="Digite seu usuário" />
+        </mat-form-field>
+        
+        <mat-form-field appearance="fill" class="form-field">
+          <mat-label>Senha</mat-label>
+          <input matInput type="password" formControlName="password" placeholder="Digite sua senha" />
+        </mat-form-field>
+        
+        <button mat-raised-button color="primary" type="submit" [disabled]="loginForm.invalid">Entrar</button>
+      </form>
+    </mat-card>
+</div>
+  

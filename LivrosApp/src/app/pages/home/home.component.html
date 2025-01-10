@@ -1,0 +1,94 @@
+<h1>Livros</h1>
+
+<!-- Filter Input -->
+<div>
+    <mat-form-field style="width: 85%;">
+        <mat-label>Filtrar</mat-label>
+        <input matInput (keyup)="applyFilter($event.target)" placeholder="Filtrar livros">
+        <button title="Baixar relatório" mat-stroked-button matSuffix (click)="BaixarRelatorio()">
+            <mat-icon>download_outline</mat-icon>
+        </button> 
+        <button title="Adicionar livro" mat-stroked-button matSuffix (click)="IrParaAdicionarEditarLivro()">
+            <mat-icon>add</mat-icon>
+        </button> 
+    </mat-form-field>
+</div>
+<div class="mat-elevation-z8">
+    <table mat-table [dataSource]="dataSource" matSort>
+        <!-- ID Column -->
+        <ng-container matColumnDef="id">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>ID</th>
+            <td mat-cell *matCellDef="let element">{{ element.id }}</td>
+        </ng-container>
+
+        <!-- Título Column -->
+        <ng-container matColumnDef="titulo">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Título</th>
+            <td mat-cell *matCellDef="let element">{{ element.titulo }}</td>
+        </ng-container>
+
+        <!-- Editora Column -->
+        <ng-container matColumnDef="editora">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Editora</th>
+            <td mat-cell *matCellDef="let element">{{ element.editora }}</td>
+        </ng-container>
+
+        <!-- Edição Column -->
+        <ng-container matColumnDef="edicao">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Edição</th>
+            <td mat-cell *matCellDef="let element">{{ element.edicao }}</td>
+        </ng-container>
+
+        <!-- Ano de Publicação Column -->
+        <ng-container matColumnDef="anoPublicacao">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Ano Publicação</th>
+            <td mat-cell *matCellDef="let element">{{ element.anoPublicacao }}</td>
+        </ng-container>
+
+        <!-- Coluna Assuntos -->
+        <ng-container matColumnDef="assuntos">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Assuntos </th>
+            <td mat-cell *matCellDef="let livro">
+                <div *ngFor="let assunto of livro.assuntos">
+                    {{ assunto.descricao }}
+                </div>
+            </td>
+        </ng-container>
+
+        <!-- Coluna Autores -->
+        <ng-container matColumnDef="autores">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Autores </th>
+            <td mat-cell *matCellDef="let livro">
+                <div *ngFor="let autor of livro.autores">
+                    {{ autor.nome }}
+                </div>
+            </td>
+        </ng-container>
+
+        <!-- Coluna Valores -->
+        <ng-container matColumnDef="valores">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Valores </th>
+            <td mat-cell *matCellDef="let livro">
+                <div *ngFor="let valor of livro.valores">
+                    {{ valor.denominacaoFormaCompra }} - {{ valor.valor | currency }}
+                </div>
+            </td>
+        </ng-container>
+
+        <ng-container matColumnDef="acoes">
+            <th mat-header-cell *matHeaderCellDef>Ações</th>
+            <td mat-cell *matCellDef="let element">
+              <button title="Editar livro" mat-stroked-button (click)="IrParaAdicionarEditarLivro(element.id)">
+                <mat-icon>edit_note</mat-icon>
+              </button>
+              <button title="Apagar livro" mat-stroked-button (click)="ApagarLivro(element.id)">
+                <mat-icon>delete_outline</mat-icon>
+              </button>
+            </td>
+          </ng-container>
+        <!-- Header and Row Definitions -->
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+</div>
+

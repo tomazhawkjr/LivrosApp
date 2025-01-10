@@ -1,0 +1,26 @@
+<h1>{{autor?.id ? 'Editar' : 'Novo'}} Autor</h1>
+
+<div class="container">
+  <mat-card>
+    <mat-card-content>
+      <form [formGroup]="autorForm" (ngSubmit)="onSubmit()">    
+    
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Nome</mat-label>
+          <input matInput type="text" formControlName="nome" placeholder="Digite o nome" />
+        </mat-form-field>
+
+        <div class="button-group">
+          <button mat-raised-button color="primary" type="submit" [disabled]="autorForm.invalid">
+            Salvar
+          </button>
+          <button mat-stroked-button color="warn" type="button" (click)="onReset()">
+            Limpar
+          </button>
+        </div>
+      </form>
+    </mat-card-content>
+  </mat-card>
+</div>
+
+

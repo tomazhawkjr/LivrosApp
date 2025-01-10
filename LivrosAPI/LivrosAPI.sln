@@ -29,6 +29,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Database", "Database", "{21
 EndProject
 Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "LivrosAPI.DB", "LivrosAPI.DB\LivrosAPI.DB.sqlproj", "{527C4A75-685B-486C-8526-A005B44D44F5}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LivrosAPI.Tests", "LivrosAPI.Tests\LivrosAPI.Tests.csproj", "{6E7F2BF1-11F3-4FD4-ABCE-62EC7515681B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -65,6 +67,10 @@ Global
 		{527C4A75-685B-486C-8526-A005B44D44F5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{527C4A75-685B-486C-8526-A005B44D44F5}.Release|Any CPU.Build.0 = Release|Any CPU
 		{527C4A75-685B-486C-8526-A005B44D44F5}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{6E7F2BF1-11F3-4FD4-ABCE-62EC7515681B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6E7F2BF1-11F3-4FD4-ABCE-62EC7515681B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6E7F2BF1-11F3-4FD4-ABCE-62EC7515681B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6E7F2BF1-11F3-4FD4-ABCE-62EC7515681B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -81,6 +87,7 @@ Global
 		{2A2B0041-3EB1-4B06-AB66-13C52D01BA37} = {4F47D899-B4DC-43DD-BC65-055A0126F578}
 		{21A64F11-8D16-4752-90EC-99990B66CF73} = {DC3EABD7-78C2-4495-8AE3-9EE7BA69BFCC}
 		{527C4A75-685B-486C-8526-A005B44D44F5} = {21A64F11-8D16-4752-90EC-99990B66CF73}
+		{6E7F2BF1-11F3-4FD4-ABCE-62EC7515681B} = {457E8F18-8C3A-4360-A507-4672F34F39AC}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {F91CB02C-F839-4C5D-9E91-DAE9FCC04D72}

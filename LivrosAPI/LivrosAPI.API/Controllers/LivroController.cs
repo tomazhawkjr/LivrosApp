@@ -40,7 +40,18 @@ namespace LivrosAPI.API.Controllers
 
             byte[] dados = result.ServiceResponse.DataFile;
 
-            return File(dados, "application/pdf", "Relatorio.pdf");
+            return File(dados, "application/pdf", "RelatorioLivros.pdf");
+        }
+
+        [HttpGet("EmitirRelatorioByAutor")]
+        public async Task<IActionResult> EmitirRelatorioByAutor()
+        {
+            RelatorioLivroByAutorQuery model = new RelatorioLivroByAutorQuery();
+            var result = await HandleRequest(model);
+
+            byte[] dados = result.ServiceResponse.DataFile;
+
+            return File(dados, "application/pdf", "RelatorioLivros_PeloAutor.pdf");
         }
 
         [HttpPut]

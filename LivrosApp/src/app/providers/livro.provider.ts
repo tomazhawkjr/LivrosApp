@@ -41,4 +41,9 @@ export class LivroProvider {
     return this.http
       .get<any>(`${this.routePrefix}/EmitirRelatorio`, {responseType: 'blob' as 'json' });      
   } 
+
+  BaixarRelatorioPeloAutor(): Observable<Blob> {
+    return this.http
+      .get<any>(`${this.routePrefix}/EmitirRelatorioByAutor`, {responseType: 'blob' as 'json' });      
+  } 
 }

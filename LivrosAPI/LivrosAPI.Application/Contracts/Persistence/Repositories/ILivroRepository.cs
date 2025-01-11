@@ -12,6 +12,7 @@ namespace LivrosAPI.Application.Contracts.Persistence.Repositories
     public interface ILivroRepository : IRepository<Livro>
     {
         public Task<List<LivroDto>> ListarLivros();
+        public Task<List<LivroByAutorDto>> ListarLivrosByAutor();
         public Task UpdateLivro(Livro livro);
         public Task DeleteLivro(int id);
     }

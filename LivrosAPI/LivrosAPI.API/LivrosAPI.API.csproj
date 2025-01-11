@@ -9,9 +9,13 @@
 
   <ItemGroup>
     <None Remove="Livros.rdlc" />
+    <None Remove="LivrosByAutor.rdlc" />
   </ItemGroup>
 
   <ItemGroup>
+    <Content Include="LivrosByAutor.rdlc">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Livros.rdlc">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

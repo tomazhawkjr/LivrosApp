@@ -1,5 +1,6 @@
 ﻿using LivrosAPI.Domain.Entities;
 using LivrosAPI.Domain.Models.Dtos;
+using LivrosAPI.Domain.Reports.Base;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -10,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace LivrosAPI.Domain.Reports
 {
-    public class LivrosReport
+    public class LivrosReport : LivrosReportBase
     {
         public List<LivroDto> _livros;
 
@@ -19,7 +20,7 @@ namespace LivrosAPI.Domain.Reports
             _livros = livros;
         }
 
-        public DataTable GetDadosLivro()
+        public override DataTable GetDadosLivro()
         {
             DataTable dadosLivro = new DataTable();
 

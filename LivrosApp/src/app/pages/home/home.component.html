@@ -5,7 +5,10 @@
     <mat-form-field style="width: 85%;">
         <mat-label>Filtrar</mat-label>
         <input matInput (keyup)="applyFilter($event.target)" placeholder="Filtrar livros">
-        <button title="Baixar relatório" mat-stroked-button matSuffix (click)="BaixarRelatorio()">
+        <button title="Baixar relatório" mat-stroked-button matSuffix (click)="BaixarRelatorio(false)">
+            <mat-icon>download_outline</mat-icon>
+        </button> 
+        <button title="Baixar relatório pelo autor" mat-stroked-button matSuffix (click)="BaixarRelatorio(true)">
             <mat-icon>download_outline</mat-icon>
         </button> 
         <button title="Adicionar livro" mat-stroked-button matSuffix (click)="IrParaAdicionarEditarLivro()">

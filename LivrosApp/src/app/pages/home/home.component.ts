@@ -54,10 +54,16 @@ export class HomeComponent implements OnInit {
     this.router.navigateByUrl(`/livro/${id}`, {state: livro});
   }
 
-  BaixarRelatorio(): void{
+  BaixarRelatorio(relatorioAutor: boolean): void{
 
     this.spinner.show();
-    this.livroProvider.BaixarRelatorio().subscribe(     
+    (
+      relatorioAutor ? 
+      this.livroProvider.BaixarRelatorioPeloAutor() 
+      : 
+      this.livroProvider.BaixarRelatorio()
+    )
+    .subscribe(     
       {
         next: (pdfBlob) => {
           this.spinner.hide();
@@ -75,7 +81,6 @@ export class HomeComponent implements OnInit {
       );
   }
 
-  // Método de remoção do livro
   ApagarLivro(id: number): void {
 
     var livro = this.listaLivros.find(l => l.id == id);

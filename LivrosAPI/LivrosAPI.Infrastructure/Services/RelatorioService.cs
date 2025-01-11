@@ -1,6 +1,7 @@
 ﻿using iText.Kernel.Pdf;
 using LivrosAPI.Application.Contracts.Infrastructure.Services;
 using LivrosAPI.Domain.Reports;
+using LivrosAPI.Domain.Reports.Base;
 using Microsoft.Reporting.NETCore;
 using System.Data;
 using System.Reflection.PortableExecutable;
@@ -14,19 +15,29 @@ namespace LivrosAPI.Infrastructure.Services
         {
         }
 
+        public byte[] GerarRelatorioLivrosByAutorPdf(LivrosByAutorReport livroReport)
+        {
+            return GerarRelatorioPdf(livroReport, livroReport._livros, "LivrosByAutor.rdlc", "LivroDataSet");
+        }
+
         public byte[] GerarRelatorioLivrosPdf(LivrosReport livroReport)
         {
-            if (livroReport == null || livroReport._livros == null || !livroReport._livros.Any())
+            return GerarRelatorioPdf(livroReport, livroReport._livros, "Livros.rdlc", "LivroDataSet");
+        }
+
+        private byte[] GerarRelatorioPdf<T>(LivrosReportBase livroReport, List<T> _livros, string nomeRdlc, string nomeDataSet, bool removerPaginasPares = true)
+        {
+            if (livroReport == null || _livros == null || !_livros.Any())
                 return null;
 
-            string reportPath = Path.Combine(Directory.GetCurrentDirectory(), "Livros.rdlc");
+            string reportPath = Path.Combine(Directory.GetCurrentDirectory(), nomeRdlc);
 
             LocalReport report = new LocalReport
             {
                 ReportPath = reportPath
             };
 
-            report.DataSources.Add(new ReportDataSource("LivroDataSet", livroReport.GetDadosLivro()));
+            report.DataSources.Add(new ReportDataSource(nomeDataSet, livroReport.GetDadosLivro()));
 
             byte[] pdfBytes = report.Render(
                 format: "PDF"
@@ -34,7 +45,10 @@ namespace LivrosAPI.Infrastructure.Services
 
             report.Dispose();
 
-            return RemoverPaginasPares(pdfBytes);
+            if(removerPaginasPares)
+                return RemoverPaginasPares(pdfBytes);
+
+            return pdfBytes;
         }
 
         private byte[] RemoverPaginasPares(byte[] pdfBytes)

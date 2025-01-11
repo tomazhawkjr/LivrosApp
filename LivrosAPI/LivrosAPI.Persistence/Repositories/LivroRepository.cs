@@ -80,6 +80,56 @@ namespace LivrosAPI.Persistence.Repositories
             }
         }
 
+        public async Task<List<LivroByAutorDto>> ListarLivrosByAutor()
+        {
+            using (var connection = new SqlConnection(ConnectionString))
+            {
+                await connection.OpenAsync();
+
+                string query = "SELECT * FROM vw_LivroDetalhado";
+                var vwlivros = await connection.QueryAsync<vw_livroDetalhado>(query);
+
+                List<LivroByAutorDto> livrosDto = vwlivros
+                                            .GroupBy(l => l.IdAutor)
+                                            .Select(g => new LivroByAutorDto
+                                            {
+                                                Id = g.Key,
+                                                Nome = g.FirstOrDefault().NomeAutor,
+                                                Livros = g.Where(a => a.IdAutor == g.Key)
+                                                .DistinctBy(a => a.IdLivro)
+                                                .Select(l => new LivroDtoByAutorLivro
+                                                {
+                                                    Titulo = l.Titulo,
+                                                    AnoPublicacao = l.AnoPublicacao,
+                                                    DataCriacao = l.DataCriacaoLivro,
+                                                    Edicao = l.Edicao,
+                                                    Editora = l.Editora,
+                                                    Valores = g.Where(a => a.IdLivro == l.IdLivro)
+                                                    .DistinctBy(a => a.IdFormaCompra)
+                                                    .Select(
+                                                        a => new LivroDtoValor(){ 
+                                                            DenominacaoFormaCompra = a.DenominacaoFormaCompra,
+                                                            IdFormaCompra = a.IdFormaCompra,
+                                                            Valor = a.ValorLivro
+                                                        }    
+                                                    ).ToList(),
+                                                    Assuntos = g.Where(a => a.IdLivro == l.IdLivro)
+                                                    .DistinctBy(a => a.IdAssunto)
+                                                    .Select(
+                                                        a => new LivroDtoAssunto()
+                                                        {
+                                                           Descricao = a.DescricaoAssunto,
+                                                           Id = a.IdAssunto
+                                                        }
+                                                    ).ToList()
+                                                }
+                                                ).ToList()                                               
+                                            }).ToList();
+
+                return livrosDto;
+            }
+        }
+
         public async Task UpdateLivro(Livro livro)
         {
             var livroAtual = await _context.Livros
